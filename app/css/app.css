@@ -27,6 +27,26 @@ a {
     cursor: pointer;
 }
 
+.price {
+  display: none;
+  position: absolute;
+  right: -10px;
+  bottom: 0px;
+  border: 1px solid black;
+  border-radius: 6px;
+  background: black;
+  color: white;
+  padding: 2px;
+}
+
+.seat-row span {
+  position: relative;
+}
+
+svg:hover + .price {
+  display: inline;
+}
+
 .buy-now {
     margin-top: 5px;
 }
@@ -34,10 +54,17 @@ a {
 .seat-row {
     border: 1px solid #AAA;
     border-radius: 3px;
-    padding: 5px;
-    margin: 5px;
-    box-shadow: 5px 5px 5px #AAA;
     text-align: center;
+    padding: 5px;
+    margin: 0;
+    box-shadow: 0;
+}
+
+.seat-row:hover {
+  --webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  margin: 5px;
+  box-shadow: 5px 5px 5px #AAA;
 }
 
 .row-name {
@@ -57,12 +84,12 @@ progress {
     border-radius: 9px;
 }
 
-progress[value] {  
-    background-color: #f3f3f3;  
-    border: 0;  
+progress[value] {
+    background-color: #f3f3f3;
+    border: 0;
     height: 18px;
     border-radius: 9px;
-}  
+}
 
 progress[value]::-webkit-progress-bar {
     border-radius: 9px;

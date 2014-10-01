@@ -10,7 +10,7 @@ angular.module('services', [])
   var socket;
   return {
     on: function (eventName, callback) {
-      socket.on(eventName, function () {  
+      socket.on(eventName, function () {
         var args = arguments;
         $rootScope.$apply(function () {
           callback.apply(socket, args);
@@ -29,7 +29,7 @@ angular.module('services', [])
     },
     connect: function(){
       if(!socket){
-          socket = io.connect('http://localhost:3000/');
+          socket = io.connect('http://localhost:5000/');
       }
     },
     disconnect: function(){

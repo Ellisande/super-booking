@@ -4,23 +4,23 @@
 <div class="pure-u-1-2 seat-row"  ng-repeat="seatRows in allSeats" ng-mousemove="stealMouse()">
 	<span ng-repeat="seat in seatRows">
 	    <svg height="40" width="40">
-            <circle 
-                cx="20" 
-                cy="20" 
-                r="10" 
-                stroke="black" 
-                stroke-width="3" 
-                class="seat" 
-                ng-class="{available: seat.available && !seat.selected, unavailable: !seat.available, selected: seat.selected }" 
-                ng-click="toggle(seat)" 
+            <circle
+                cx="20"
+                cy="20"
+                r="10"
+                stroke="black"
+                stroke-width="3"
+                class="seat"
+                ng-class="{available: seat.available && !seat.selected, unavailable: !seat.available, selected: seat.selected }"
+                ng-click="toggle(seat)"
                 snoop
                 />
-            Sorry, your browser does not support inline SVG.  
-        </svg> 
+            Sorry, your browser does not support inline SVG.
+        </svg>
+      <div class="price">$5</div>
 	</span>
 	<div class="row-name">Row {{$index}}</div>
 </div>
 <div class="pure-u-1">
     <button class="pure-button pure-button-primary buy-now">Buy these seats!</button>
 </div>
-

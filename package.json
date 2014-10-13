@@ -1,11 +1,11 @@
 {
-    "name": "booking-example"
-  , "version": "1.0.0"
-  , "private": true
-  , "dependencies": {
-      "express": "2.5.x"
-    , "socket.io": ">= 0.9.x"
-    , "moment": "2.x"
-    , "angular": "1.x.x"
+  "name": "booking-example",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "angular": "1.x.x",
+    "express": "2.5.x",
+    "moment": "^2.8.3",
+    "socket.io": ">= 1.x.x"
   }
 }

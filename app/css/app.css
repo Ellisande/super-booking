@@ -30,8 +30,8 @@ a {
 .price {
   display: none;
   position: absolute;
-  right: -10px;
-  bottom: 0px;
+  right: -15px;
+  bottom: -15px;
   border: 1px solid black;
   border-radius: 6px;
   background: black;

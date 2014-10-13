@@ -1,3 +1,4 @@
+var moment = require('moment');
 var seats = function(){
     var newSeats = [];
     for(var i = 0; i < 5; i++){
@@ -9,11 +10,13 @@ var seats = function(){
                     seat: j
                 },
                 available: true,
-                consideration: 0
+                consideration: [],
+                basePrice: 5.00,
+                price: 5.00,
             };
         }
     }
-    
+
     return newSeats;
 }();
 
@@ -23,7 +26,7 @@ var socket = function (socket) {
       id: socket.id,
       confusion: 1
     };
-    
+
     socket.on('init', function(){
         users.push(user);
         user.index = users.indexOf(user);
@@ -31,37 +34,43 @@ var socket = function (socket) {
             user: user,
             seats: seats
         });
-        
+
         socket.broadcast.emit('user:add', {
             users: users
         });
     });
-    
+
     socket.on('init:admin', function(){
         socket.emit('init:admin', {
             users: users,
             seats: seats
         });
     });
-    
-    var switchSeats = function(){
-        var row = Math.floor(5 * Math.random());
-        var seat = seats[row][Math.floor((row * 5) * Math.random())];
-        if(seat) {seat.available = !seat.available;}
-        socket.emit('seat:update', {
-            seats: seats
-        });
-        
-        setTimeout(switchSeats, 10000);
-    };
-    
-    switchSeats();
 
     socket.on('seat:considered', function(data){
-        seats[data.id.row][data.id.seat].consideration++;
+        var currentSeat = seats[data.id.row][data.id.seat];
+        currentSeat.consideration.push(new moment());
+        var recentConsideration = 0;
+        currentSeat.consideration.forEach(function(time){
+          if(time.diff(moment().subtract(1, 'minute')) < 60000){
+            recentConsideration++;
+          }
+        });
+
+        currentSeat.price = currentSeat.basePrice + (0.50 * recentConsideration);
+        if(recentConsideration < 3){
+          currentSeat.price = currentSeat.price / 2;
+        }
         socket.broadcast.emit('seat:considered', {
             seats: seats
         });
+        var data = {
+          row: data.id.row,
+          column: data.id.seat,
+          seat: currentSeat
+        };
+        socket.emit('seat:update', data);
+        socket.broadcast.emit('seat:update', data);
     });
 
     socket.on('mouse:moved', function(){
@@ -70,21 +79,20 @@ var socket = function (socket) {
             users: users
         })
     });
-    
+
     socket.on('disconnect', function(){
         users.some(function(currentUser, index){
             if(currentUser.id == user.id){
                 users.splice(index, 1);
                 return true;
-            } 
+            }
             return false;
         });
         socket.broadcast.emit('user:update', {
             users: users
         });
     });
-      
+
 };
 
 module.exports = socket;
-

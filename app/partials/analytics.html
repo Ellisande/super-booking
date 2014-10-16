@@ -1,22 +1,28 @@
-<div class="pure-u-1">
+<div class="grid-25">
     <h2>Users</h2>
     <div ng-repeat="user in allUsers">
         <h5>How confused is {{user.id | limitTo:5}}?</h5>
         <div>
-            <progress value="{{user.confusion}}" max="1000" ng-class="{}"></progress>
+            <progress value="{{user.confusion}}" max="1000"></progress>
         </div>
     </div>
 </div>
-<div class="pure-u-1" ng-init="consideration = '-consideration'; price='-price'">
-    <div class="pure-u-1-2">
+<div class="grid-75">
+    <div class="grid-33">
       <h2>Most Popular Seats</h2>
-      <ul ng-repeat="seat in seats | orderBy:consideration | limitTo:10">
-          <li>{{seat.id.row}}-{{seat.id.seat}} : {{seat.consideration}}</li>
+      <ul ng-repeat="seat in seats | orderBy:'-consideration.length' | limitTo:10">
+          <li>{{seat.id.row}}-{{seat.id.seat}} : {{seat.consideration.length}}</li>
       </ul>
     </div>
-    <div class="pure-1-2">
+    <div class="grid-33">
       <h2>Most expensive Seats</h2>
-      <ul ng-repeat="seat in seats | orderBy:price | limitTo:10">
+      <ul ng-repeat="seat in seats | orderBy:'-price' | limitTo:10">
+          <li>{{seat.id.row}}-{{seat.id.seat}} : {{seat.price | currency}}</li>
+      </ul>
+    </div>
+    <div class="grid-33">
+      <h2>Discounted Seats</h2>
+      <ul ng-repeat="seat in seats | orderBy:'price' | limitTo:10">
           <li>{{seat.id.row}}-{{seat.id.seat}} : {{seat.price | currency}}</li>
       </ul>
     </div>

@@ -11,9 +11,9 @@ The booking branch demonstrates a more "realistic" server push event for updatin
 
 Npm and node js are required to run this application. You can get them at http://nodejs.org
 
-* Clone the repo:  ```git clone http://github.com/Ellisande/web-socket-examples```
+* Clone the repo:  ```git clone http://github.com/Ellisande/super-booking```
 * Switch to the gold-buying branch:  ```git checkout booking```
 * Install the dependencies:  ```npm install```
 * Start the server:  ```node server.js```
-* View the booking page: http://localhost:3000/
-* View the analytics page: http://localhost:3000/#/analytics
+* View the booking page: http://localhost:5000/
+* View the analytics page: http://localhost:5000/#/analytics

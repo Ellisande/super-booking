@@ -32,6 +32,20 @@ function HomeCtrl($scope, $location, socket) {
             seat.selected = !seat.selected;
         }
     }
+
+    $scope.$watch('allSeats', function(){
+      var total = 0;
+      $scope.allSeats.forEach(function(row){
+        row.forEach(function(seat){
+          if(seat.selected){
+            total += seat.price;
+          }
+        });
+      });
+      if(total != $scope.total){
+        $scope.total = total;
+      }
+    }, true);
 }
 
 function AnalyticsCtrl($scope, socket){

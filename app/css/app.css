@@ -49,6 +49,13 @@ svg:hover + .price {
 
 .buy-now {
     margin-top: 5px;
+    background: rgb(30, 30, 170);
+    border-radius: 10px;
+    border: 1px solid white;
+    cursor: pointer;
+    font-size: 2rem;
+    color: white;
+    padding: 5px;
 }
 
 .seat-row {
